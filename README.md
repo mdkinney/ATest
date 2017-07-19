@@ -7,7 +7,7 @@ Contributions to the EDK II open source project are covered by the
 [TianoCore Contribution Agreement 1.1](Contributions.txt)
 
 The majority of the content in the EDK II is open source project uses
-a [BSD license](LICENSE).  The the EDK II open source project components
+a [BSD 2-Clause License](LICENSE).  The the EDK II open source project components
 covered by additional licenses are as follows:
 * [AppPkg\Applications\Python\Python-2.7.2\Tools\pybench](AppPkg\Applications\Python\Python-2.7.2\Tools\pybench\LICENSE)
 * [AppPkg\Applications\Python\Python-2.7.2](AppPkg\Applications\Python\Python-2.7.2\LICENSE)
