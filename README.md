@@ -20,10 +20,11 @@ the following components that are covered by additional licenses:
 * [CryptoPkg\Library\OpensslLib\openssl](CryptoPkg\Library\OpensslLib\openssl\LICENSE)
 
 # Resources
+* [TianoCore](http://www.tianocore.org)
 * [EDK II](https://github.com/tianocore/tianocore.github.io/wiki/EDK-II)
 * [Mailing Lists](https://github.com/tianocore/tianocore.github.io/wiki/Mailing-Lists)
+* [TianoCore Bugzilla](https://bugzilla.tianocore.org)
 * [How To Contribute](https://github.com/tianocore/tianocore.github.io/wiki/How-To-Contribute)
-* [TianoCore Bugzilla](https://bugzilla.tianocore.org/)
 
 # Change Description / Commit Message / Patch Email
 
