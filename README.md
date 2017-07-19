@@ -22,6 +22,7 @@ the following components that are covered by additional licenses:
 # Resources
 * [TianoCore](http://www.tianocore.org)
 * [EDK II](https://github.com/tianocore/tianocore.github.io/wiki/EDK-II)
+* [Getting Started with EDK II](https://github.com/tianocore/tianocore.github.io/wiki/Getting-Started-with-EDK-II)
 * [Mailing Lists](https://github.com/tianocore/tianocore.github.io/wiki/Mailing-Lists)
 * [TianoCore Bugzilla](https://bugzilla.tianocore.org)
 * [How To Contribute](https://github.com/tianocore/tianocore.github.io/wiki/How-To-Contribute)
