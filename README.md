@@ -9,15 +9,15 @@ Contributions to the EDK II open source project are covered by the
 The majority of the content in the EDK II open source project uses a
 [BSD 2-Clause License](LICENSE).  The EDK II open source project contains
 the following components that are covered by additional licenses:
-* [AppPkg\Applications\Python\Python-2.7.2\Tools\pybench](AppPkg\Applications\Python\Python-2.7.2\Tools\pybench\LICENSE)
-* [AppPkg\Applications\Python\Python-2.7.2](AppPkg\Applications\Python\Python-2.7.2\LICENSE)
-* [AppPkg\Applications\Python\Python-2.7.10](AppPkg\Applications\Python\Python-2.7.10\LICENSE)
-* [BaseTools\Source\C\BrotliCompress](BaseTools\Source\C\BrotliCompress\LICENSE)
-* [MdeModulePkg\Library\BrotliCustomDecompressLib](MdeModulePkg\Library\BrotliCustomDecompressLib\LICENSE)
+* [AppPkg/Applications/Python/Python-2.7.2/Tools/pybench](AppPkg/Applications/Python/Python-2.7.2/Tools/pybench/LICENSE)
+* [AppPkg/Applications/Python/Python-2.7.2](AppPkg/Applications/Python/Python-2.7.2/LICENSE)
+* [AppPkg/Applications/Python/Python-2.7.10](AppPkg/Applications/Python/Python-2.7.10/LICENSE)
+* [BaseTools/Source/C/BrotliCompress](BaseTools/Source/C/BrotliCompress/LICENSE)
+* [MdeModulePkg/Library/BrotliCustomDecompressLib](MdeModulePkg/Library/BrotliCustomDecompressLib/LICENSE)
 * [OvmfPkg/Include/IndustryStandard/Xen](OvmfPkg/License.txt)
 * [OvmfPkg/XenBusDxe](OvmfPkg/License.txt)
 * [OvmfPkg/XenPvBlkDxe](OvmfPkg/License.txt)
-* [CryptoPkg\Library\OpensslLib\openssl](CryptoPkg\Library\OpensslLib\openssl\LICENSE)
+* [CryptoPkg/Library/OpensslLib/openssl](CryptoPkg/Library/OpensslLib/openssl/LICENSE)
 
 # Resources
 * [TianoCore](http://www.tianocore.org)
