@@ -16,6 +16,24 @@
       "revId": "99c31c02d9e7529d4bd7a025dc997771679d3cab",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6854304_f8724e4e",
+        "filename": "Foo.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012406
+      },
+      "writtenOn": "2019-04-05T01:59:13Z",
+      "side": 1,
+      "message": "I agree",
+      "parentUuid": "393f3517_901eb2dd",
+      "revId": "99c31c02d9e7529d4bd7a025dc997771679d3cab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
