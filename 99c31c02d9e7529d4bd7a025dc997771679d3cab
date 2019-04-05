@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "393f3517_901eb2dd",
+        "filename": "Foo.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012406
+      },
+      "writtenOn": "2019-04-05T01:29:28Z",
+      "side": 1,
+      "message": "This sentence is missing a \u0027.\u0027",
+      "revId": "99c31c02d9e7529d4bd7a025dc997771679d3cab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
