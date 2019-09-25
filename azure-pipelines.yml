@@ -24,6 +24,6 @@ steps:
     echo Build Requested For Id    = $(Build.RequestedForId)
     echo Build Source Branch       = $(Build.SourceBranch)
     set
-    hub
-    curl
+    curl -i "https://api.github.com/teams/1649488/members"
+    curl -i "https://api.github.com/teams/1649488/memberships/mdkinney"
   displayName: 'Run a multi-line script'
