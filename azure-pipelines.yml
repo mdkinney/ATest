@@ -17,7 +17,9 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
     echo Build Reason              = $(Build.Reason)
+    echo Build Queued By           = $(Build.QueuedBy)
     echo Build Requested For Email = $(Build.RequestedForEmail)
     echo Build Requested For Id    = $(Build.RequestedForId)
     echo Build Source Branch       = $(Build.SourceBranch)
+    set
   displayName: 'Run a multi-line script'
