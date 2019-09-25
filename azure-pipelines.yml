@@ -24,4 +24,6 @@ steps:
     echo Build Requested For Id    = $(Build.RequestedForId)
     echo Build Source Branch       = $(Build.SourceBranch)
     set
+    hub
+    curl
   displayName: 'Run a multi-line script'
