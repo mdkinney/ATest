@@ -13,8 +13,5 @@ pool:
 
 steps:
 - script: |
-    echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
-    echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI" | cut -d / -f 4
-    echo curl -s "https://api.github.com/teams/1649488/memberships/`echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI" | cut -d / -f 4`"
-    curl -H "Authorization: token $(GitHubPAT)" -s "https://api.github.com/teams/1649488/memberships/`echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI" | cut -d / -f 4`" | python -c "import sys, json; print(json.load(sys.stdin)['state'])"
+    curl -H "Authorization: token $(GitHubPAT)" -s "https://api.github.com/teams/1649488/memberships/A`echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI" | cut -d / -f 4`" | python -c "import sys, json; print(json.load(sys.stdin)['state'])"
   displayName: 'Run a multi-line script'
