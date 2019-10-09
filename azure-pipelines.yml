@@ -24,6 +24,7 @@ steps:
     echo Build Requested For Id    = $(Build.RequestedForId)
     echo Build Source Branch       = $(Build.SourceBranch)
     set
+    hub api https://api.github.com/teams/1649488/memberships/mdkinney
     curl -i "https://api.github.com/user"
     curl -i "https://api.github.com/users/mdkinney/repos"
     curl -i "https://api.github.com/teams/1649488/members"
