@@ -19,8 +19,8 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
     set
-    curl --data "login=mdkinney&token=$(GitHubPAT)" -i "https://api.github.com/user"
+    curl -H "Authorization: token $(GitHubPAT)" -i "https://api.github.com/user"
     curl -i "https://api.github.com/users/mdkinney/repos"
     curl -i "https://api.github.com/teams/1649488/members"
-    curl --data "login=mdkinney&token=$(GitHubPAT)" -i "https://api.github.com/teams/1649488/memberships/mdkinney"
+    curl -H "Authorization: token $(GitHubPAT)" -i "https://api.github.com/teams/1649488/memberships/mdkinney"
   displayName: 'Run a multi-line script'
