@@ -18,15 +18,9 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    echo Build Reason              = $(Build.Reason)
-    echo Build Queued By           = $(Build.QueuedBy)
-    echo Build Requested For Email = $(Build.RequestedForEmail)
-    echo Build Requested For Id    = $(Build.RequestedForId)
-    echo Build Source Branch       = $(Build.SourceBranch)
     set
-    hub api https://api.github.com/teams/1649488/memberships/mdkinney
-    curl -i "https://api.github.com/user"
+    curl --data "login=mdkinney&token=$(GitHubPAT)" -i "https://api.github.com/user"
     curl -i "https://api.github.com/users/mdkinney/repos"
     curl -i "https://api.github.com/teams/1649488/members"
-    curl -i "https://api.github.com/teams/1649488/memberships/mdkinney"
+    curl --data "login=mdkinney&token=$(GitHubPAT)" -i "https://api.github.com/teams/1649488/memberships/mdkinney"
   displayName: 'Run a multi-line script'
