@@ -21,3 +21,4 @@ Add line for Example_PR_14 Patch #1.
 Add line for Example_PR_15 Patch #1. 
 Add line for Example_PR_22 Patch #1. 
 Add line for Example_PR_23 Patch #1. 
+Add line for Example_PR_26 Patch #1. 
