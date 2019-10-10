@@ -30,9 +30,9 @@ steps:
       # Check number of arguments
       #
       if len(sys.argv) < 4:
-      	print('CheckGitHubTeamMembership: Too few arguments.')
-      	print('  Usage: CheckGitHubTeamMembership <Token> <Team#> <PR URI>')
-      	sys.exit(1)
+        print('CheckGitHubTeamMembership: Too few arguments.')
+        print('  Usage: CheckGitHubTeamMembership <Token> <Team#> <PR URI>')
+        sys.exit(1)
       #
       # Fill in Authorization token using Personal Access Token (PAT)
       #
@@ -44,8 +44,8 @@ steps:
       #
       User = sys.argv[3].split('/')
       if len(User) < 4:
-      	print('CheckGitHubTeamMembership: Can not parse PR GitHub ID from PR URI')
-      	sys.exit(1)
+        print('CheckGitHubTeamMembership: Can not parse PR GitHub ID from PR URI')
+        sys.exit(1)
       User = User[3]
       #
       # Generate GitHub API request and parse the JSON response
@@ -60,24 +60,24 @@ steps:
       # an error.
       #
       if 'state' not in Membership or 'role' not in Membership:
-      	print('CheckGitHubTeamMembership: User {User} not found.'
+        print('CheckGitHubTeamMembership: User {User} not found.'
               .format(User=User))
-      	sys.exit(1)
+        sys.exit(1)
       #
       # If JSON response does not show the user as active, then exit with an error.
       #
       if Membership['state'] not in ['active']:
-      	print('CheckGitHubTeamMembership: User {User} is not active.'
+        print('CheckGitHubTeamMembership: User {User} is not active.'
               .format(User=User))
-      	sys.exit(1)
+        sys.exit(1)
       #
       # If JSON response does not show the user with a role of member or maintainer,
       # then exit with an error
       #
       if Membership['role'] not in ['member', 'maintainer']:
-      	print('CheckGitHubTeamMembership: User {User} is not a member/maintainer.'
+        print('CheckGitHubTeamMembership: User {User} is not a member/maintainer.'
               .format(User=User))
-      	sys.exit(1)
+        sys.exit(1)
       #
       # JSON response indicates that user is an active member/maintainer.  Exit
       # with success.
