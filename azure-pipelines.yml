@@ -13,5 +13,5 @@ pool:
 
 steps:
 - script: |
-    $(Build.SourcesDirectory)/CheckEdkiiMaintainersMembership.py
+    python $(Build.SourcesDirectory)/CheckEdkiiMaintainersMembership.py
   displayName: 'Run a multi-line script'
