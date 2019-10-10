@@ -1,3 +1,15 @@
+## @file
+# Mergify YML file that automatically merges a GitHub pull request against
+# master if all of the GitHub branch protections have passed.
+#
+# Copyright (c) 2019, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# https://github.com/apps/mergify
+# https://doc.mergify.io/
+#
+##
+
 pull_request_rules:
   - name: automatic merge when GitHub branch protection passes
     conditions:
