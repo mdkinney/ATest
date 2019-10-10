@@ -16,6 +16,8 @@ import os
 import sys
 import requests
 
+print (os.environ)
+
 headers = {
   'Authorization': 'token ' + os.environ['GitHubPAT'],
 }
