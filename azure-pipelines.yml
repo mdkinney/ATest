@@ -23,9 +23,6 @@ steps:
     script: |
       import sys
       import requests
-      print('Hello world 1')
-      # comment
-      print('Hello world 2')
       #
       # Check number of arguments
       #
