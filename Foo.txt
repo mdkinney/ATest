@@ -35,3 +35,4 @@ Add line for Example_PR_47 Patch #1.
 Add line for Example_PR_48 Patch #1. 
 Add line for Example_PR_50 Patch #1. 
 Add line for Example_PR_56 Patch #1. 
+Add line for Example_PR_60 Patch #1. 
