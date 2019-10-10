@@ -13,5 +13,5 @@ pool:
 
 steps:
 - script: |
-    curl -H "Authorization: token $(GitHubPAT)" -s "https://api.github.com/teams/1649488/memberships/A`echo "$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI" | cut -d / -f 4`" | python -c "import sys, json; print(json.load(sys.stdin)['state'])"
+    $(Build.SourcesDirectory)/CheckEdkiiMaintainersMembership.py
   displayName: 'Run a multi-line script'
