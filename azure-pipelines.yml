@@ -19,7 +19,7 @@ steps:
   displayName: 'Check EDK II Maintainers team membership'
   inputs:
     arguments: $(GitHubPAT) 1649488 $(System.PullRequest.SourceRepositoryURI)
-    targetType: 'inline'
+    scriptSource: inline
     script: |
       import sys
       import requests
