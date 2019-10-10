@@ -14,5 +14,5 @@ pool:
 steps:
 - script: |
     pip install --user requests
-    python $(Build.SourcesDirectory)/CheckEdkiiMaintainersMembership.py $(GitHubPAT) 1649488
-  displayName: 'Run a multi-line script'
+    python $(Build.SourcesDirectory)/CheckGitHubTeamMembership.py $(GitHubPAT) 1649488 $(System.PullRequest.SourceRepositoryURI)
+  displayName: 'Check EDK II Maintainers team membership'
