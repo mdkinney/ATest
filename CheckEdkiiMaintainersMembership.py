@@ -19,7 +19,7 @@ import requests
 print (os.environ)
 
 headers = {
-  'Authorization': 'token ' + os.environ['GitHubPAT'],
+  'Authorization': 'token ' + sys.argv[1],
 }
 
 try:
@@ -28,7 +28,7 @@ except:
   print ('PR URL is not valid')
   sys.exit (1)
 
-response = requests.get('https://api.github.com/teams/1649488/memberships/' + user, headers=headers)
+response = requests.get('https://api.github.com/teams/' + sys.argv[2] + '/memberships/' + user, headers=headers)
 
 Membership = response.json()
 if 'state' not in Membership:
