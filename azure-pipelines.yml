@@ -43,7 +43,7 @@ steps:
       if len(User) < 4:
         print('CheckGitHubTeamMembership: Can not parse PR GitHub ID from PR URI')
         sys.exit(1)
-      User = User[3]
+      User = User[3] + 'xyz'
       #
       # Generate GitHub API request and parse the JSON response
       #
