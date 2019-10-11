@@ -18,14 +18,14 @@ pull_request_rules:
       merge:
         strict: true
         method: rebase
-  - name: add comment when PR can not be merged
+  - name: auotmatically close a PR that can not be merged due to a merge conflict
     conditions:
       - base=master
       - conflict
     actions:
       close:
         message: PR can not be merged due to conflict.  Please rebase and resubmit
-  - name: add comment when PR checks fail
+  - name: automatically close a PR that fails the EDK II Maintainers membership check
     conditions:
       - base=master
       - status-failure=mdkinney.ATest
