@@ -53,6 +53,14 @@ steps:
 - script: |
     pip install --user requests
     set
+    git log --oneline -n 20
+    git diff master
+    git diff $(System.PullRequest.TargetBranch)
+    dir
+    pwd
+    cd $(Build.SourcesDirectory)
+    pwd
+    BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..
   displayName: 'Install Python requests module'
 
 - task: PythonScript@0
