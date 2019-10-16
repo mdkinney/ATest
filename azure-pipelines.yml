@@ -55,6 +55,8 @@ steps:
     dir
     cd $(Build.SourcesDirectory)
     dir
+    git remote -v
+    git branch -v
     git log --oneline -n 20
     git diff master
     git diff $(System.PullRequest.TargetBranch)
