@@ -49,13 +49,7 @@ steps:
     versionSpec: '3.7.x'
     architecture: 'x64'
 
-
-
-- script: |
-    pip install --user requests
-    python --version
-    git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
-    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
+- script: pip install --user requests
   displayName: 'Install Python requests module'
 
 - task: PythonScript@0
@@ -133,3 +127,8 @@ steps:
       #
       print('CheckGitHubTeamMembership: User {User} is active {Role}.'
           .format(User=User, Role=Membership['role']))
+
+- script: |
+    git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
+    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
+  displayName: 'Use PatchCheck.py to verify patch series in pull request'
