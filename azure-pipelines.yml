@@ -50,7 +50,9 @@ steps:
     versionSpec: '3.7.x'
     architecture: 'x64'
 
-- script: pip install --user requests
+- script: |
+    pip install --user requests
+    set
   displayName: 'Install Python requests module'
 
 - task: PythonScript@0
