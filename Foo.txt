@@ -49,3 +49,4 @@ Add line for Example_PR_70 Patch #1.
 Add line for Example_PR_73 Patch #1.
 Add line for Example_PR_76 Patch #1.
 Add line for Example_PR_77 Patch #1.
+Add line for Example_PR_78 Patch #1.
