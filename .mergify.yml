@@ -29,6 +29,9 @@ pull_request_rules:
       merge:
         strict: true
         method: rebase
+      backport:
+        branches:
+          - prtest
   - name: post a comment on a PR that can not be merged due to a merge conflict
     conditions:
       - base=master

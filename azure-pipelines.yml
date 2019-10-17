@@ -46,14 +46,6 @@ steps:
 - checkout: self
   clean: true
 
-- script: |
-    git checkout prtest
-    git rebase master
-    git push
-    git checkout master
-  condition: in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI')
-  displayName: 'Sync prtest branch'
-
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.7.x'
