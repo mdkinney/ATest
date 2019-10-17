@@ -53,3 +53,18 @@ pull_request_rules:
     actions:
       comment:
         message: PR can not be merged due to PatchCheck errors.  Please resolve and resubmit
+
+  - name: post a comment on a PR that can not be merged due to a merge conflict
+    conditions:
+      - base=prtest
+      - conflict
+    actions:
+      comment:
+        message: PR can not be merged due to conflict.  Please rebase and resubmit
+  - name: post a comment on a PR that does not pass PatchCheck.py checks
+    conditions:
+      - base=prtest
+      - status-failure=mdkinney.PatchCheck
+    actions:
+      comment:
+        message: PR can not be merged due to PatchCheck errors.  Please resolve and resubmit

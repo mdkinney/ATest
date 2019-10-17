@@ -16,6 +16,7 @@ trigger: none
 
 pr:
 - master
+- prtest
 
 pool:
   vmImage: 'ubuntu-latest'
