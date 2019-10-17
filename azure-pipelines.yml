@@ -32,7 +32,8 @@
 #
 ##
 
-trigger: none
+trigger:
+- master
 
 pr:
 - master
