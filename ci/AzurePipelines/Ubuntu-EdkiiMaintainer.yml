@@ -32,19 +32,16 @@
 #
 ##
 
-trigger:
-- master
+trigger: none
 
 pr:
 - master
-- prtest
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- checkout: self
-  clean: true
+- checkout: none
 
 - task: UsePythonVersion@0
   inputs:
@@ -52,11 +49,9 @@ steps:
     architecture: 'x64'
 
 - script: pip install --user requests
-  condition: eq(variables['Build.Reason'], 'PullRequest')
   displayName: 'Install Python requests module'
 
 - task: PythonScript@0
-  condition: eq(variables['Build.Reason'], 'PullRequest')
   displayName: 'Check EDK II Maintainers team membership'
   inputs:
     arguments: $(GitHubPAT) $(Build.Repository.Id) $(System.PullRequest.PullRequestNumber) 1649488
@@ -131,9 +126,3 @@ steps:
       #
       print('CheckGitHubTeamMembership: User {User} is active {Role}.'
           .format(User=User, Role=Membership['role']))
-
-- script: |
-    git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
-    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
-  condition: eq(variables['Build.Reason'], 'PullRequest')
-  displayName: 'Use PatchCheck.py to verify patch series in pull request'
