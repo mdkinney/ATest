@@ -29,6 +29,10 @@ pull_request_rules:
       merge:
         strict: true
         method: rebase
+  - name: automatic backport to prtest when GitHub branch protection passes
+    conditions:
+      - base=master
+    actions:
       backport:
         branches:
           - prtest
