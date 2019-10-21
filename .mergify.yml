@@ -28,6 +28,7 @@ pull_request_rules:
   - name: automatic merge when GitHub branch protection passes
     conditions:
       - base=master
+      - label=push
     actions:
       merge:
         strict: true
@@ -42,6 +43,7 @@ pull_request_rules:
   - name: automatically close a PR that fails the EDK II Maintainers membership check
     conditions:
       - base=master
+      - label=push
       - status-failure=mdkinney.EdkiiMaintainersCheck
     actions:
       close:
