@@ -36,6 +36,7 @@ pull_request_rules:
   - name: automatic close when GitHub branch protection passes and 'push' label is not present
     conditions:
       - base=master
+      - status-success=mdkinney.PatchCheck
       - label!=push
     actions:
       close:
