@@ -36,7 +36,7 @@ pull_request_rules:
   - name: automatic close when GitHub branch protection passes and 'push' label is not present
     conditions:
       - base=master
-      - label=!push
+      - label!=push
     actions:
       close:
         message: All checks passed.  Auto close personal build.
