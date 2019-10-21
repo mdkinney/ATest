@@ -29,6 +29,8 @@ pull_request_rules:
     conditions:
       - base=master
       - label=push
+      - status-success=mdkinney.EdkiiMaintainersCheck
+      - status-success=mdkinney.PatchCheck
     actions:
       merge:
         strict: true
@@ -36,8 +38,8 @@ pull_request_rules:
   - name: automatic close when GitHub branch protection passes and 'push' label is not present
     conditions:
       - base=master
-      - status-success=mdkinney.PatchCheck
       - label!=push
+      - status-success=mdkinney.PatchCheck
     actions:
       close:
         message: All checks passed.  Auto close personal build.
