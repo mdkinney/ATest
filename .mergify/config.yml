@@ -29,7 +29,7 @@ pull_request_rules:
     conditions:
       - base=master
       - label=push
-      - author=@tianocore/edk-ii-maintainers
+      - author=mdkinney
       - status-success=mdkinney.PatchCheck
     actions:
       merge:
@@ -54,7 +54,7 @@ pull_request_rules:
     conditions:
       - base=master
       - label=push
-      - -author=@tianocore/edk-ii-maintainers
+      - -author=mdkinney
     actions:
       close:
         message: PR submitter is not a member of the Tianocore EDK II Maintainers team
