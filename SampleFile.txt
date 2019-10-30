@@ -114,3 +114,4 @@ Add line for Example_PR_124 Patch #3.
 "Add line for EDK_II_CI_Unit_Test20_Maintainer_Multi_Patch_Push patch #3."
 "Add line for EDK_II_CI_Unit_Test23_Maintainer_Single_Patch_Push."
 "Add line for EDK_II_CI_Unit_Test23_Maintainer_Multi_Patch_Push patch #1."
+"Add line for EDK_II_CI_Unit_Test23_Maintainer_Multi_Patch_Push patch #2."
