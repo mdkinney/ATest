@@ -2293,3 +2293,4 @@
 
 [UserExtensions.TianoCore."ExtraFiles"]
   MdePkgExtra.uni
+# Add line for EDK_II_CI_Unit_Test32_Maintainer_Single_Patch_MdePkgDec_Personal.
