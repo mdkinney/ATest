@@ -136,3 +136,4 @@ Add line for Example_PR_144 Patch #3.
 Add line for EDK_II_CI_Unit_Test32_Maintainer_Single_Patch_Push.
 Add line for EDK_II_CI_Unit_Test32_Maintainer_Multi_Patch_Personal patch #1.
 Add line for EDK_II_CI_Unit_Test32_Maintainer_Multi_Patch_Personal patch #2.
+Add line for EDK_II_CI_Unit_Test32_Maintainer_Multi_Patch_Personal patch #3.
