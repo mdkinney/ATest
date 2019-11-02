@@ -30,7 +30,7 @@ pull_request_rules:
       - base=master
       - label=push
       - author=mdkinney
-      - status-success=mdkinney.PatchCheck
+      - -status-failure~=^.*
     actions:
       merge:
         strict: true
@@ -39,7 +39,7 @@ pull_request_rules:
     conditions:
       - base=master
       - label!=push
-      - status-success=mdkinney.PatchCheck
+      - -status-failure~=^.*
     actions:
       close:
         message: All checks passed.  Auto close personal build.
@@ -61,7 +61,7 @@ pull_request_rules:
   - name: post a comment on a PR that does not pass PatchCheck.py checks
     conditions:
       - base=master
-      - status-failure=mdkinney.PatchCheck
+      - status-failure~=^.*
     actions:
       comment:
-        message: PR can not be merged due to PatchCheck errors.  Please resolve and resubmit
+        message: PR can not be merged due to one or more check failures.  Please resolve and resubmit
