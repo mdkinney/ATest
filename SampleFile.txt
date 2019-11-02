@@ -139,3 +139,4 @@ Add line for EDK_II_CI_Unit_Test32_Maintainer_Multi_Patch_Push patch #2.
 Add line for EDK_II_CI_Unit_Test32_Maintainer_Multi_Patch_Push patch #3.
 Add line for Example_PR_153 Patch #1.
 Add line for Example_PR_153 Patch #2.
+Add line for Example_PR_153 Patch #3.
