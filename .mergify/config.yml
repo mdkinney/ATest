@@ -41,10 +41,8 @@ pull_request_rules:
     conditions:
       - base=master
       - label!=push
-      - status-success~=^mdkinney\.PatchCheck$
-      - status-success~=^mdkinney\.PatchCheck \(CPU\)$
-      - status-success~=^mdkinney\.PatchCheck \(MDE\)$
-      - -status-success~=^Rule.*$
+      - -conflict
+      - -status-failure~=^.*
     actions:
       close:
         message: All checks passed.  Auto close personal build.
