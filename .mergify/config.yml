@@ -41,9 +41,9 @@ pull_request_rules:
     conditions:
       - base=master
       - label!=push
-      - -conflict
-      - -status-failure~=^.*
-      - -status-neutral~=^.*
+      - status-success~=^mdkinney\.PatchCheck$
+      - status-success~=^mdkinney\.PatchCheck \(CPU\)$
+      - status-success~=^mdkinney\.PatchCheck \(MDE\)$
     actions:
       close:
         message: All checks passed.  Auto close personal build.
@@ -63,24 +63,10 @@ pull_request_rules:
       close:
         message: PR submitter is not a member of the Tianocore EDK II Maintainers team
 
-  - name: post a comment on a PR that does not pass PatchCheck.py checks
+  - name: post a comment on a PR that does not pass a check
     conditions:
       - base=master
-      - status-failure~=^mdkinney\.PatchCheck$
+      - -status-failure~=^Rule.*
     actions:
       comment:
-        message: PR can not be merged due to a PatchCheck failure.  Please resolve and resubmit
-  - name: post a comment on a PR that does not pass PatchCheck.py checks
-    conditions:
-      - base=master
-      - status-failure~=^mdkinney\.PatchCheck \(CPU\)$
-    actions:
-      comment:
-        message: PR can not be merged due to a PatchCheck (CPU) failure.  Please resolve and resubmit
-  - name: post a comment on a PR that does not pass PatchCheck.py checks
-    conditions:
-      - base=master
-      - status-failure~=^mdkinney\.PatchCheck \(MDE\)$
-    actions:
-      comment:
-        message: PR can not be merged due to a PatchCheck (MDE) failure.  Please resolve and resubmit
+        message: PR can not be merged due to a check failure.  Please resolve and resubmit
