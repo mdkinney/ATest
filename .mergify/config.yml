@@ -26,7 +26,7 @@
 
 pull_request_rules:
 
-  - name: Mergify: Automatically merge a PR when all required checks pass and 'push' label is present
+  - name: Automatically merge a PR when all required checks pass and 'push' label is present
     conditions:
       - base=master
       - label=push
@@ -39,7 +39,7 @@ pull_request_rules:
         strict: true
         method: rebase
 
-  - name: Mergify: Automatically close a PR when all required checks pass and 'push' label is not present
+  - name: Automatically close a PR when all required checks pass and 'push' label is not present
     conditions:
       - base=master
       - label!=push
@@ -50,7 +50,7 @@ pull_request_rules:
       close:
         message: All checks passed.  Auto close personal build.
 
-  - name: Mergify: Post a comment on a PR that can not be merged due to a merge conflict
+  - name: Post a comment on a PR that can not be merged due to a merge conflict
     conditions:
       - base=master
       - conflict
@@ -58,7 +58,7 @@ pull_request_rules:
       comment:
         message: PR can not be merged due to conflict.  Please rebase and resubmit
 
-  - name: Mergify: Automatically close a PR that fails the EDK II Maintainers membership check and 'push' label is present
+  - name: Automatically close a PR that fails the EDK II Maintainers membership check and 'push' label is present
     conditions:
       - base=master
       - label=push
@@ -67,7 +67,7 @@ pull_request_rules:
       close:
         message: PR submitter is not a member of the Tianocore EDK II Maintainers team
 
-  - name: Mergify: Post a comment on a PR if any required check fails
+  - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
       - status-failure~=^mdkinney\.PatchCheck$
@@ -75,7 +75,7 @@ pull_request_rules:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
 
-  - name: Mergify: Post a comment on a PR if any required check fails
+  - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
       - status-failure~=^mdkinney\.PatchCheck \(CPU\)$
@@ -83,7 +83,7 @@ pull_request_rules:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
 
-  - name: Mergify: Post a comment on a PR if any required check fails
+  - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
       - status-failure~=^mdkinney\.PatchCheck \(MDE\)$
