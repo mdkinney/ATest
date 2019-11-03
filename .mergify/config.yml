@@ -66,7 +66,7 @@ pull_request_rules:
   - name: post a comment on a PR that does not pass a check
     conditions:
       - base=master
-      - -status-failure~=^Rule.*
+      - status-failure~=^(?!Rule.*$).*$
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
