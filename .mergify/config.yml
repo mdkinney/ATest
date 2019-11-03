@@ -43,6 +43,7 @@ pull_request_rules:
       - label!=push
       - -conflict
       - -status-failure~=^.*
+      - -status-neutral~=^.*
     actions:
       close:
         message: All checks passed.  Auto close personal build.
