@@ -54,7 +54,8 @@ pull_request_rules:
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
     actions:
       label:
-        add: close
+        add:
+          - close
 
   - name: Post a comment on a PR that can not be merged due to a merge conflict
     conditions:
