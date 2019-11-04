@@ -44,6 +44,7 @@ pull_request_rules:
       - base=master
       - label!=push
       - -closed
+      - -conflict
       - status-success~=^mdkinney\.PatchCheck$
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
@@ -57,6 +58,7 @@ pull_request_rules:
       - base=master
       - label=close
       - -closed
+      - -conflict
     actions:
       close:
         message: All checks passed. Auto close personal build.
