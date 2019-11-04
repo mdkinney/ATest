@@ -18,19 +18,29 @@ pr:
 - master
 - prtest
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
 
-steps:
-- checkout: self
-  clean: true
+- job: A
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.7.x'
-    architecture: 'x64'
+  pool:
+    vmImage: 'ubuntu-latest'
 
-- script: |
-    git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
-    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
-  displayName: 'Use PatchCheck.py to verify patch series in pull request'
+  steps:
+  - checkout: self
+    clean: true
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7.x'
+      architecture: 'x64'
+
+  - script: |
+      git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
+      python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
+    displayName: 'Use PatchCheck.py to verify patch series in pull request'
+
+- job: B
+  dependsOn: A
+  steps:
+  - script: echo Done
+    displayName: Job A Done
