@@ -46,7 +46,7 @@ pull_request_rules:
       - status-success~=^mdkinney\.PatchCheck$
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
-      - "#status-success>=3"
+      - "#status-success>=4"
       - -closed
     actions:
       close:
