@@ -60,6 +60,9 @@ pull_request_rules:
       - -closed
       - -conflict
     actions:
+      label:
+        remove:
+          - close
       close:
         message: All checks passed. Auto close personal build.
 
