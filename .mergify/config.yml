@@ -39,7 +39,7 @@ pull_request_rules:
         strict: true
         method: rebase
 
-  - name: Automatically close a PR when all required checks pass and 'push' label is not present
+  - name: Automatically add label 'close' to a PR when all required checks pass and 'push' label is not present
     conditions:
       - base=master
       - label!=push
@@ -47,9 +47,16 @@ pull_request_rules:
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
     actions:
+      label:
+        add:
+          - close
+
+  - name: Automatically close a PR with 'close' label present
+    conditions:
+      - base=master
+      - label=close
+    actions:
       close:
-        message: ""
-      comment:
         message: All checks passed. Auto close personal build.
 
   - name: Post a comment on a PR that can not be merged due to a merge conflict
