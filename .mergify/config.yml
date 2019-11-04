@@ -43,6 +43,7 @@ pull_request_rules:
     conditions:
       - base=master
       - -label=push
+      - -closed
       - status-success~=^mdkinney\.PatchCheck$
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
