@@ -20,7 +20,7 @@ pr:
 
 jobs:
 
-- job: A
+- job: MATRIX
 
   pool:
     vmImage: 'ubuntu-latest'
@@ -39,8 +39,8 @@ jobs:
       python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
     displayName: 'Use PatchCheck.py to verify patch series in pull request'
 
-- job:
-  dependsOn: A
+- job: DONE
+  dependsOn: MATRIX
   steps:
-  - script: echo Done
-    displayName: Job A Done
+  - script: echo DONE
+    displayName: DONE
