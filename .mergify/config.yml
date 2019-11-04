@@ -42,27 +42,12 @@ pull_request_rules:
   - name: Automatically add label 'close' to a PR when all required checks pass and 'push' label is not present
     conditions:
       - base=master
-      - label!=push
-      - -closed
-      - -conflict
+      - -label=push
       - status-success~=^mdkinney\.PatchCheck$
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
-    actions:
-      label:
-        add:
-          - close
-
-  - name: Automatically close a PR with 'close' label present
-    conditions:
-      - base=master
-      - label=close
       - -closed
-      - -conflict
     actions:
-      label:
-        remove:
-          - close
       close:
         message: All checks passed. Auto close personal build.
 
