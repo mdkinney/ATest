@@ -44,13 +44,14 @@ pull_request_rules:
       - base=master
       - -label=push
       - -closed
-      - -locked
       - status-success~=^mdkinney\.PatchCheck$
       - status-success~=^mdkinney\.PatchCheck \(CPU\)$
       - status-success~=^mdkinney\.PatchCheck \(MDE\)$
     actions:
-      close:
+      comment:
         message: All checks passed. Auto close personal build.
+      close:
+        message: ""
 
   - name: Post a comment on a PR that can not be merged due to a merge conflict
     conditions:
