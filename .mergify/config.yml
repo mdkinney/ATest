@@ -47,9 +47,9 @@ pull_request_rules:
       - status-success=mdkinney.PatchCheck
       - status-success=mdkinney.PatchCheck (CPU)
       - status-success=mdkinney.PatchCheck (MDE)
-      - status-success=mdkinney.PatchCheck (SUCCESS)
-      - status-success=mdkinney.PatchCheck (CPU) (SUCCESS)
-      - status-success=mdkinney.PatchCheck (MDE) (SUCCESS)
+      - status-success=mdkinney.PatchCheck (FINISHED)
+      - status-success=mdkinney.PatchCheck (CPU) (FINISHED)
+      - status-success=mdkinney.PatchCheck (MDE) (FINISHED)
     actions:
       close:
         message: All checks passed. Auto close personal build.
@@ -75,7 +75,7 @@ pull_request_rules:
     conditions:
       - base=master
       - status-failure=mdkinney.PatchCheck
-      - status-success=mdkinney.PatchCheck (FAILED)
+      - status-failure=mdkinney.PatchCheck (FINISHED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
@@ -84,7 +84,7 @@ pull_request_rules:
     conditions:
       - base=master
       - status-failure=mdkinney.PatchCheck (CPU)
-      - status-success=mdkinney.PatchCheck (CPU) (FAILED)
+      - status-failure=mdkinney.PatchCheck (CPU) (FINISHED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
@@ -93,7 +93,7 @@ pull_request_rules:
     conditions:
       - base=master
       - status-failure=mdkinney.PatchCheck (MDE)
-      - status-success=mdkinney.PatchCheck (MDE) (FAILED)
+      - status-failure=mdkinney.PatchCheck (MDE) (FINISHED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
