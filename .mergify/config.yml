@@ -31,9 +31,9 @@ pull_request_rules:
       - base=master
       - label=push
       - author=mdkinney
-      - status-success~=^mdkinney\.PatchCheck$
-      - status-success~=^mdkinney\.PatchCheck \(CPU\)$
-      - status-success~=^mdkinney\.PatchCheck \(MDE\)$
+      - status-success=mdkinney.PatchCheck
+      - status-success=mdkinney.PatchCheck (CPU)
+      - status-success=mdkinney.PatchCheck (MDE)
     actions:
       merge:
         strict: true
@@ -43,11 +43,13 @@ pull_request_rules:
     conditions:
       - base=master
       - -label=push
-      - status-success~=^mdkinney\.PatchCheck$
-      - status-success~=^mdkinney\.PatchCheck \(CPU\)$
-      - status-success~=^mdkinney\.PatchCheck \(MDE\)$
-      - "#status-success>=4"
       - -closed
+      - status-success=mdkinney.PatchCheck
+      - status-success=mdkinney.PatchCheck (CPU)
+      - status-success=mdkinney.PatchCheck (MDE)
+      - status-success=mdkinney.PatchCheck (SUCCESS)
+      - status-success=mdkinney.PatchCheck (CPU) (SUCCESS)
+      - status-success=mdkinney.PatchCheck (MDE) (SUCCESS)
     actions:
       close:
         message: All checks passed. Auto close personal build.
@@ -72,7 +74,8 @@ pull_request_rules:
   - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
-      - status-failure~=^mdkinney\.PatchCheck$
+      - status-failure=mdkinney.PatchCheck
+      - status-success=mdkinney.PatchCheck (FAILED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
@@ -80,7 +83,8 @@ pull_request_rules:
   - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
-      - status-failure~=^mdkinney\.PatchCheck \(CPU\)$
+      - status-failure=mdkinney.PatchCheck (CPU)
+      - status-success=mdkinney.PatchCheck (CPU) (FAILED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit
@@ -88,7 +92,8 @@ pull_request_rules:
   - name: Post a comment on a PR if any required check fails
     conditions:
       - base=master
-      - status-failure~=^mdkinney\.PatchCheck \(MDE\)$
+      - status-failure=mdkinney.PatchCheck (MDE)
+      - status-success=mdkinney.PatchCheck (MDE) (FAILED)
     actions:
       comment:
         message: PR can not be merged due to a check failure.  Please resolve and resubmit

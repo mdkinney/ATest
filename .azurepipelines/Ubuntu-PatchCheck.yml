@@ -39,11 +39,20 @@ jobs:
       python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
     displayName: 'Use PatchCheck.py to verify patch series in pull request'
 
-- job: FINISHED
+- job: SUCCESS
   dependsOn: MATRIX
-  condition: succeededOrFailed()
+  condition: succeeded()
   steps:
   - script: |
-      echo FINISHED
+      echo SUCCESS
       sleep 10
-    displayName: FINISHED
+    displayName: SUCCESS
+
+- job: FAILED
+  dependsOn: MATRIX
+  condition: failed()
+  steps:
+  - script: |
+      echo FAILED
+      sleep 10
+    displayName: FAILED
