@@ -44,13 +44,7 @@ jobs:
   condition: succeededOrFailed()
   steps:
   - script: |
-      echo SUCCESS
+      set
+      echo FINISHED 1>&2
       sleep 10
-    condition: succeeded()
-    displayName: SUCCESS
-  - script: |
-      echo FAILED
-      sleep 10
-      exit 1
-    condition: failed()
-    displayName: FAILED
+    displayName: FINISHED
