@@ -1,5 +1,7 @@
 This is a new file.
 
+**Add a line
+
 Add line for Example_PR_1.
 
 Add line for Example_PR_2 Patch #1.
@@ -88,7 +90,6 @@ Add line for Example_PR_112 Patch #3.
 Add line for Example_PR_111 Patch #1.
 Add line for Example_PR_111 Patch #2.
 Add line for Example_PR_111 Patch #3.
-Add line for Example_PR_113 Patch #1.
 Add line for Example_PR_113 Patch #2.
 Add line for Example_PR_113 Patch #3.
 Add line for Example_PR_120 Patch #1.
@@ -148,4 +149,7 @@ Add line for Example_PR_181 Patch #2.
 Add line for Example_PR_181 Patch #3.
 Add line for Example_PR_198 Patch #1.
 Add line for Example_PR_198 Patch #2.
+
+**Add a line
+
 Add line for Example_PR_198 Patch #3.
