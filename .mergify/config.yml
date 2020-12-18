@@ -31,25 +31,18 @@ pull_request_rules:
       - base=master
       - label=push
       - author=mdkinney
-      - status-success=mdkinney.PatchCheck
-      - status-success=mdkinney.PatchCheck (CPU)
-      - status-success=mdkinney.PatchCheck (MDE)
     actions:
       merge:
-        strict: true
         method: rebase
+        rebase_fallback: null
+        strict: smart
+        strict_method: rebase
 
   - name: Automatically add label 'close' to a PR when all required checks pass and 'push' label is not present
     conditions:
       - base=master
       - -label=push
       - -closed
-      - status-success=mdkinney.PatchCheck
-      - status-success=mdkinney.PatchCheck (CPU)
-      - status-success=mdkinney.PatchCheck (MDE)
-      - status-success=mdkinney.PatchCheck (FINISHED)
-      - status-success=mdkinney.PatchCheck (CPU) (FINISHED)
-      - status-success=mdkinney.PatchCheck (MDE) (FINISHED)
     actions:
       close:
         message: All checks passed. Auto close personal build.
@@ -70,30 +63,3 @@ pull_request_rules:
     actions:
       close:
         message: PR submitter is not a member of the Tianocore EDK II Maintainers team
-
-  - name: Post a comment on a PR if any required check fails
-    conditions:
-      - base=master
-      - status-failure=mdkinney.PatchCheck
-      - status-failure=mdkinney.PatchCheck (FINISHED)
-    actions:
-      comment:
-        message: PR can not be merged due to a check failure.  Please resolve and resubmit
-
-  - name: Post a comment on a PR if any required check fails
-    conditions:
-      - base=master
-      - status-failure=mdkinney.PatchCheck (CPU)
-      - status-failure=mdkinney.PatchCheck (CPU) (FINISHED)
-    actions:
-      comment:
-        message: PR can not be merged due to a check failure.  Please resolve and resubmit
-
-  - name: Post a comment on a PR if any required check fails
-    conditions:
-      - base=master
-      - status-failure=mdkinney.PatchCheck (MDE)
-      - status-failure=mdkinney.PatchCheck (MDE) (FINISHED)
-    actions:
-      comment:
-        message: PR can not be merged due to a check failure.  Please resolve and resubmit
