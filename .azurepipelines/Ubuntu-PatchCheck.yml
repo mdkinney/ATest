@@ -48,7 +48,7 @@ jobs:
   steps:
   - script: |
       set
-      echo FINISHED 1>&2
+      echo FINISHED
       sleep 10
     failOnStderr: true
     condition: succeededOrFailed()
