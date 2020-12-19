@@ -28,7 +28,7 @@ pull_request_rules:
 
   - name: Automatically merge a PR when all required checks pass and 'push' label is present
     conditions:
-      - base=master
+      - base~=(^master|^stable/)
       - label=push
       - author=mdkinney
     actions:
@@ -40,7 +40,7 @@ pull_request_rules:
 
   - name: Automatically add label 'close' to a PR when all required checks pass and 'push' label is not present
     conditions:
-      - base=master
+      - base~=(^master|^stable/)
       - -label=push
       - -closed
     actions:
@@ -49,7 +49,7 @@ pull_request_rules:
 
   - name: Post a comment on a PR that can not be merged due to a merge conflict
     conditions:
-      - base=master
+      - base~=(^master|^stable/)
       - conflict
     actions:
       comment:
@@ -57,7 +57,7 @@ pull_request_rules:
 
   - name: Automatically close a PR that fails the EDK II Maintainers membership check and 'push' label is present
     conditions:
-      - base=master
+      - base~=(^master|^stable/)
       - label=push
       - -author=mdkinney
     actions:
