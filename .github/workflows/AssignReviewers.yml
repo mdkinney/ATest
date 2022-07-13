@@ -10,7 +10,7 @@ name: Assign reviewers from .github/REVIEWERS using CODEWONERS syntax
 on:
   pull_request:
     types:
-      - opened
+      - [opened, reopened, synchronize]
     branches:
       - master
       - 'releases/**'
@@ -25,12 +25,17 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"    
-      - run: echo $ {{ github.event.pull_request.reviewers }}
+      - name: Dump Requested Reviewers
+        env:
+          REVIEWER_CONTEXT: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
+        run: echo "$REVIEWER_CONTEXT"
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - run: pip install codeowners GitPython PyGithub
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
-            import codeowners
+            from codeowners import CodeOwners
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
+            for File in Git('.').ls_files().split():
+              print (File, reviewers.of(File))
