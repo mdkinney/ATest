@@ -10,7 +10,9 @@ name: Assign reviewers from .github/REVIEWERS using CODEWONERS syntax
 on:
   pull_request:
     types:
-      - [opened, reopened, synchronize]
+      - opened
+      - reopened
+      - synchronize
     branches:
       - master
       - 'releases/**'
