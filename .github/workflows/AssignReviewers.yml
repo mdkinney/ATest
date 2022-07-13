@@ -38,6 +38,7 @@ jobs:
         with:
           script: |
             from codeowners import CodeOwners
+            from git import Git
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
             for File in Git('.').ls_files().split():
-              print (File, reviewers.of(File))
+                print (File, reviewers.of(File))
