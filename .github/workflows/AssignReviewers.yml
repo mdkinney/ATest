@@ -32,9 +32,7 @@ jobs:
           REVIEWER_CONTEXT: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
         run: echo "$REVIEWER_CONTEXT"
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/checkout@v3
+      - run: git fetch +refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/* --depth ${{ github.event.pull_request.commits }}
       - run: git log --oneline ${{ github.event.pull_request.base.sha }}
       - run: git log --oneline ${{ github.event.pull_request.head.sha }}
       - run: git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
