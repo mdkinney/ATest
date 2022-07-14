@@ -19,7 +19,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  assign_owners:
+  assign_reviewers:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,7 +31,13 @@ jobs:
         env:
           REVIEWER_CONTEXT: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
         run: echo "$REVIEWER_CONTEXT"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v3
+      - run: git log --oneline ${{ github.event.pull_request.base.sha }}
+      - run: git log --oneline ${{ github.event.pull_request.head.sha }}
+      - run: git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-python@v2
       - run: pip install codeowners GitPython PyGithub
       - uses: jannekem/run-python-script-action@v1
@@ -46,7 +52,7 @@ jobs:
             for File in repo.ls_files().split():
                 print ('  ', File, reviewers.of(File))
             print ('Files in PR')
-            for File in repo.diff('${{github.event.pull_request.base.sha}}','--name-only').split():
+            for File in repo.diff('${{github.event.pull_request.base.sha}}..${{github.event.pull_request.head.sha}}','--name-only').split():
                 print ('  ', File, reviewers.of(File))
             Hub = Github('${{ secrets.GITHUB_TOKEN }}')
             print ('Hub:', Hub)
