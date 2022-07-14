@@ -26,7 +26,7 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"    
+        run: echo "$GITHUB_CONTEXT"
       - name: Dump Requested Reviewers
         env:
           REVIEWER_CONTEXT: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
@@ -39,6 +39,14 @@ jobs:
           script: |
             from codeowners import CodeOwners
             from git import Git
+            from github import Github
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
-            for File in Git('.').ls_files().split():
-                print (File, reviewers.of(File))
+            repo = Git('.')
+            print ('Files in repo')
+            for File in repo.ls_files().split():
+                print ('  ', File, reviewers.of(File))
+            print ('Files in PR')
+            for File in repo.diff('${{github.event.pull_request.base.sha}}','--name-only').split():
+                print ('  ', File, reviewers.of(File))
+            Hub = Github('${{ secrets.GITHUB_TOKEN }}')
+            print ('Hub:', Hub)
