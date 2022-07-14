@@ -33,10 +33,14 @@ jobs:
         run: echo "$REVIEWER_CONTEXT"
       - uses: actions/checkout@v3
       - run: git remote -v
+      - run: git log --oneline
       - run: git fetch origin +refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/* --depth ${{ github.event.pull_request.commits }}
       - run: git log --oneline ${{ github.event.pull_request.base.sha }}
+        if: {{ always() }}
       - run: git log --oneline ${{ github.event.pull_request.head.sha }}
+        if: {{ always() }}
       - run: git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+        if: {{ always() }}
       - uses: actions/setup-python@v2
       - run: pip install codeowners GitPython PyGithub
       - uses: jannekem/run-python-script-action@v1
