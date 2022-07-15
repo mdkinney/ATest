@@ -34,11 +34,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{github.event.pull_request.base.ref}}
-      - run: git remote -v
-      - run: git log --oneline
-      - run: git fetch origin +refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/* --depth ${{ github.event.pull_request.commits }}
-      - run: git log --oneline ${{ github.event.pull_request.head.sha }}
-      - run: git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-python@v2
       - run: pip install codeowners GitPython PyGithub
       - uses: jannekem/run-python-script-action@v1
@@ -49,11 +44,9 @@ jobs:
             from github import Github
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
             repo = Git('.')
-            print ('Files in repo')
-            for File in repo.ls_files().split():
-                print ('  ', File, reviewers.of(File))
+            repo.remotes['origin'].fetch('+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*', depth=${{ github.event.pull_request.commits }} + 1)
             print ('Files in PR')
-            for File in repo.diff('${{github.event.pull_request.base.sha}}..${{github.event.pull_request.head.sha}}','--name-only').split():
+            for File in repo.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
                 print ('  ', File, reviewers.of(File))
             Hub = Github('${{ secrets.GITHUB_TOKEN }}')
             print ('Hub:', Hub)
