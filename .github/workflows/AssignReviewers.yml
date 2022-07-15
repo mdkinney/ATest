@@ -43,8 +43,8 @@ jobs:
             from git import Repo
             from github import Github
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
-            repo = Repo('.')
-            repo.remotes['origin'].fetch('+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*', depth=${{ github.event.pull_request.commits }} + 1)
+            repo = Git('.')
+            repo.fetch('origin', '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*', depth=${{ github.event.pull_request.commits }} + 1)
             print ('Files in PR')
             for File in repo.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
                 print ('  ', File, reviewers.of(File))
