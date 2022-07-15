@@ -17,6 +17,9 @@ on:
       - master
       - 'releases/**'
 
+permissions:
+    pull-requests: write
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   assign_reviewers:
@@ -36,21 +39,41 @@ jobs:
           ref: ${{github.event.pull_request.base.ref}}
       - uses: actions/setup-python@v2
       - run: pip install codeowners GitPython PyGithub
-      - uses: jannekem/run-python-script-action@v1
+      - name: Assign Reviewers from .github/REVIEWERS
+        env:
+          REVIEWER_CONTEXT: ${{ toJSON(github.event.pull_request.requested_reviewers) }}
+        uses: jannekem/run-python-script-action@v1
         with:
           script: |
+            import os
+            import json
             from codeowners import CodeOwners
             from git import Git
             from github import Github
-            reviewers = CodeOwners(open('.github/REVIEWERS').read())
-            local = Git('.')
-            local.fetch(
-                    'origin',
-                    '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*',
-                    depth=${{ github.event.pull_request.commits }} + 1
-                    )
-            print ('Files in PR')
-            for File in local.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
-                print ('  ', File, reviewers.of(File))
-            Hub = Github('${{ secrets.GITHUB_TOKEN }}')
-            print ('Hub:', Hub)
+            CurrentReviewers = [x['login'] for x in json.loads (os.environ['REVIEWER_CONTEXT'])]
+            print ('CurrentReviewers:', CurrentReviewers)
+            AllReviewers = CodeOwners(open('.github/REVIEWERS').read())
+            LocalRepo = Git('.')
+            LocalRepo.fetch(
+                        'origin',
+                        '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*',
+                        depth=${{ github.event.pull_request.commits }} + 1
+                        )
+            AddReviewers = []
+            for File in LocalRepo.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
+                print ('File:', File, AllReviewers.of(File))
+                for FileReviewer in AllReviewers.of(File):
+                    FileReviewerLogin = FileReviewer[1].lstrip('@')
+                    if FileReviewerLogin not in CurrentReviewers:
+                        AddReviewers.append(FileReviewerLogin)
+            print ('AddReviewers:', AddReviewers)
+            if AddReviewers:
+                Hub = Github('${{ secrets.GITHUB_TOKEN }}')
+                print ('Hub:', Hub)
+                HubRepo = Hub.get_repo('${{ github.event.repository.full_name }}')
+                print ('HubRepo:', HubRepo)
+                HubPullRequest = HubRepo.get_pull(${{ github.event.pull_request.number }})
+                print ('HubPullRequest:', HubPullRequest)
+                HubPullRequest.create_review_request(AddReviewers)
+                UpdatedReviewers = [x.login for x in HubPullRequest.get_review_requests()[0]]
+                print ('UpdatedReviewers:', UpdatedReviewers)
