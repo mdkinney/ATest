@@ -40,13 +40,13 @@ jobs:
         with:
           script: |
             from codeowners import CodeOwners
-            from git import Repo
+            from git import Git
             from github import Github
             reviewers = CodeOwners(open('.github/REVIEWERS').read())
-            repo = Git('.')
-            repo.fetch('origin', '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*', depth=${{ github.event.pull_request.commits }} + 1)
+            local = Git('.')
+            local.fetch('origin', '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*', depth=${{ github.event.pull_request.commits }} + 1)
             print ('Files in PR')
-            for File in repo.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
+            for File in local.diff('${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}','--name-only').split():
                 print ('  ', File, reviewers.of(File))
             Hub = Github('${{ secrets.GITHUB_TOKEN }}')
             print ('Hub:', Hub)
