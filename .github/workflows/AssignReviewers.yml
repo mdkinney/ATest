@@ -50,6 +50,8 @@ jobs:
             from codeowners import CodeOwners
             from git import Git
             from github import Github
+            Hub = Github('${{ secrets.GITHUB_TOKEN }}')
+            print ('Hub:', Hub)
             CurrentReviewers = [x['login'] for x in json.loads (os.environ['REVIEWER_CONTEXT'])]
             print ('CurrentReviewers:', CurrentReviewers)
             AllReviewers = CodeOwners(open('.github/REVIEWERS').read())
@@ -64,12 +66,15 @@ jobs:
                 print ('File:', File, AllReviewers.of(File))
                 for FileReviewer in AllReviewers.of(File):
                     FileReviewerLogin = FileReviewer[1].lstrip('@')
-                    if FileReviewerLogin not in CurrentReviewers:
+                    if '@' in FileReviewerLogin:
+                        for User in Hub.search_users(FileReviewerLogin + ' in email'):
+                            if FileReviewerLogin == User.email:
+                                FileReviewerLogin = User.login
+                                break
+                    if FileReviewerLogin not in CurrentReviewers and FileReviewerLogin not in AddReviewers:
                         AddReviewers.append(FileReviewerLogin)
             print ('AddReviewers:', AddReviewers)
             if AddReviewers:
-                Hub = Github('${{ secrets.GITHUB_TOKEN }}')
-                print ('Hub:', Hub)
                 HubRepo = Hub.get_repo('${{ github.event.repository.full_name }}')
                 print ('HubRepo:', HubRepo)
                 HubPullRequest = HubRepo.get_pull(${{ github.event.pull_request.number }})
