@@ -9,10 +9,7 @@ name: Assign reviewers from .github/REVIEWERS using CODEWONERS syntax
 
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
+    types: [opened, synchronize, reopened, ready_for_review]
     branches:
       - master
       - 'stable/**'
@@ -23,14 +20,18 @@ permissions:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   assign_reviewers:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{github.event.pull_request.base.ref}}
+#        with:
+#          ref: ${{github.event.pull_request.base.ref}}
       - uses: actions/setup-python@v2
-      - run: pip install codeowners GitPython PyGithub
+        with:
+          cache: 'pip'
+          cache-dependency-path: '.github/workflows/workflows-pip-requirements.txt'
+      - run: pip install -r .github/workflows/workflows-pip-requirements.txt
       - name: Assign Reviewers from .github/REVIEWERS
         uses: jannekem/run-python-script-action@v1
         with:
