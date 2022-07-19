@@ -73,7 +73,7 @@ jobs:
                             UserReviewers.add (User.login)
                             break
             UserReviewers -= set([x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.requested_reviewers)}}''')])
-            UserReviewers -= set([${{ github.event.pull_request.user.login }}])
+            UserReviewers -= set(['${{ github.event.pull_request.user.login }}'])
             TeamReviewers -= set([x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.requested_teams)}}''')])
             if UserReviewers or TeamReviewers:
                 print ('Add Reviewers User:', UserReviewers, 'Team:', TeamReviewers)
