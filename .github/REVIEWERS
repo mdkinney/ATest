@@ -1,2 +1,4 @@
-*  miki.demeter@intel.com
-#* @mdkinney
+/.github/**    @miki-intel-work
+/.mergify/**   @miki-intel-work
+/MdePkg/**     @makubacki
+/BaseTools/**  @mdkinney
