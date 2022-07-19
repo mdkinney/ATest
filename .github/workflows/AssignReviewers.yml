@@ -1,11 +1,11 @@
 ## @file
-# Assign reviewers from .github/REVIEWERS using CODEWONERS syntax
+# Assign reviewers from .github/REVIEWERS using CODEOWNERS syntax
 #
 # Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: Assign reviewers from .github/REVIEWERS using CODEWONERS syntax
+name: Assign reviewers from .github/REVIEWERS using CODEOWNERS syntax
 
 on:
   pull_request:
@@ -41,6 +41,7 @@ jobs:
             from   git        import Git
             from   github     import Github
             Hub = None
+            HubPullRequest = None
             LocalRepo = Git('.')
             LocalRepo.fetch('origin','${{github.event.pull_request.base.ref}}', depth=1)
             AllReviewers = CodeOwners(LocalRepo.show('origin/${{github.event.pull_request.base.ref}}:.github/REVIEWERS'))
@@ -69,8 +70,8 @@ jobs:
                         if FileReviewer[1].lower() == User.email.lower():
                             UserReviewers.add (User.login)
                             break
-            UserReviewers -= set([x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.requested_reviewers)}}''')])
-            UserReviewers -= set(['${{ github.event.pull_request.user.login }}'])
+            Author = '${{ github.event.pull_request.user.login }}'
+            UserReviewers -= set([Author] + [x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.requested_reviewers)}}''')])
             TeamReviewers -= set([x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.requested_teams)}}''')])
             if UserReviewers or TeamReviewers:
                 print ('Add Reviewers User:', UserReviewers, 'Team:', TeamReviewers)
@@ -78,3 +79,10 @@ jobs:
                     Hub = Github('${{ secrets.GITHUB_TOKEN }}')
                 HubPullRequest = Hub.get_repo('${{ github.event.repository.full_name }}').get_pull(${{ github.event.pull_request.number }})
                 HubPullRequest.create_review_request(list(UserReviewers), list(TeamReviewers))
+            if Author not in set([x['login'] for x in json.loads ('''${{ toJSON(github.event.pull_request.assignees)}}''')]):
+                print ('Add Assignee:', Author)
+                if not Hub:
+                    Hub = Github('${{ secrets.GITHUB_TOKEN }}')
+                if not HubPullRequest:
+                    HubPullRequest = Hub.get_repo('${{ github.event.repository.full_name }}').get_pull(${{ github.event.pull_request.number }})
+                HubPullRequest.add_to_assignees(Author)
