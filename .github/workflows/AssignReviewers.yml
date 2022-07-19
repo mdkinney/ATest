@@ -25,8 +25,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-#        with:
-#          ref: ${{github.event.pull_request.base.ref}}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-python@v2
         with:
           cache: 'pip'
@@ -41,13 +41,10 @@ jobs:
             from   git        import Git
             from   github     import Github
             Hub = None
-            AllReviewers = CodeOwners(open('.github/REVIEWERS').read())
             LocalRepo = Git('.')
-            LocalRepo.fetch(
-                        'origin',
-                        '+refs/pull/${{ github.event.pull_request.number }}/*:refs/remotes/origin/pr/${{ github.event.pull_request.number }}/*',
-                        depth=${{ github.event.pull_request.commits }} + 1
-                        )
+            LocalRepo.fetch('origin','${{github.event.pull_request.base.ref}}', depth=1)
+            AllReviewers = CodeOwners(LocalRepo.show('origin/${{github.event.pull_request.base.ref}}:.github/REVIEWERS'))
+            LocalRepo.fetch('origin', '${{ github.event.pull_request.head.sha }}', depth=${{ github.event.pull_request.commits }} + 1)
             ModifiedFiles = LocalRepo.diff(
                               '${{github.event.pull_request.head.sha}}~${{ github.event.pull_request.commits }}..${{github.event.pull_request.head.sha}}',
                               '--name-only'
