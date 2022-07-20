@@ -7,17 +7,11 @@
 
 name: Assign reviewers from .github/REVIEWERS using CODEOWNERS syntax
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    branches:
-      - master
-      - 'stable/**'
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
-    branches:
-      - master
-      - 'stable/**'
+on: [pull_request, pull_request_target]
+  types: [opened, synchronize, reopened, ready_for_review]
+  branches:
+    - master
+    - 'stable/**'
 
 permissions:
     pull-requests: write
